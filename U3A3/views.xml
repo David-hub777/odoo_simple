@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--action -->
+	<record id="cliente_action" model="ir.actions.act_window">
+		<field name="name">Action cliente</field>
+		<field name="res_model">cliente_pedido.cliente</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+    <record id="pedido_action" model="ir.actions.act_window">
+        <field name="name">Action Pedido</field>
+        <field name="res_model">cliente_pedido.pedido</field>
+        <field name="view_mode">tree,form,calendar</field>
+    </record>
+
+
+
+
+	<!--tree-->
+    <record id="view_cliente_tree" model="ir.ui.view">
+        <field name="name">cliente.tree</field>
+        <field name="model">cliente_pedido.cliente</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="fecha_inicio"/>
+				<field name="valoracion_pedidos" />
+                <field name="numero_pedidos" />
+                <field name="satisfaccion_cliente" />
+                <field name="pedidos"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_pedido_tree" model="ir.ui.view">
+        <field name="name">pedido.tree</field>
+        <field name="model">cliente_pedido.pedido</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="fecha_del_pedido"/>
+                <field name="fecha_prevista_entrega"/>
+                <field name="cliente_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+
+	<!-- formulario -->
+    <record id="cliente_form" model="ir.ui.view" >
+		<field name="name">cliente.form</field>
+		<field name="model">cliente_pedido.cliente</field>
+		<field name="arch" type="xml">
+			<form string="Cliente">
+				<sheet>
+					<group>
+						<field name="name"/>
+                        <field name="fecha_inicio"/>
+                        <field name="valoracion_pedidos" />
+                        <field name="numero_pedidos" />
+                        <field name="satisfaccion_cliente" />
+                        <field name="pedidos" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+
+    <record id="pedido_form" model="ir.ui.view" >
+		<field name="name">pedido.form</field>
+		<field name="model">cliente_pedido.pedido</field>
+		<field name="arch" type="xml">
+			<form string="Pedido">
+				<sheet>
+					<group>
+						<field name="name"/>
+                        <field name="fecha_del_pedido"/>
+                        <field name="fecha_prevista_entrega"/>
+                        <field name="cliente_id"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="pedido_calendar" model="ir.ui.view" >
+		<field name="name">pedido.calendar</field>
+		<field name="model">cliente_pedido.pedido</field>
+		<field name="arch" type="xml">
+			<calendar string="Pedido" date_start="fecha_del_pedido" date_stop="fecha_prevista_entrega">
+				<field name="name"/>
+				<field name="cliente_id"/>
+			</calendar>
+		</field>
+	</record>
+
+
+
+
+
+
+	<!--menuitem-->
+	<menuitem
+		id="Empresa"
+		name="Empresa"
+		sequence="10"/>
+	<menuitem
+		id="cliente"
+		name="cliente"
+		action="cliente_action"
+		parent="Empresa"
+		sequence="10"/>
+    <menuitem
+		id="pedido"
+		name="pedido"
+		action="pedido_action"
+		parent="Empresa"
+		sequence="10"/>
+</odoo>
